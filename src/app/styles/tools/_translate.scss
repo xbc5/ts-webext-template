@@ -1,0 +1,30 @@
+@use 'sass:string';
+/// Return a calc() expression that's useful for translating an element, with a gap.
+/// Why? In some cases the padding or margin will cause a translate to fall short, use this
+/// to include an expression that calculates the full length at runtime.
+///
+/// @param {string} $direction - left, right, up, or down. The direction of the translation.
+/// @param {<length> | string} $gap - either a length unit, or a custom property name.
+/// There's no need to wrap a custom property name in var().
+/// @param {<length>} $length [100%] - the size of the accompanying length -- usually the containing
+/// element. 100% is a typical value.
+/// @return {string} - a calc() expression, ready to use as a value within a property: e.g. translateX(...).
+/// @example
+/// transform: translateX(with-gap(left, --padding));
+/// transform: translateY(with-gap(down, 25px, width: 25%);
+@function with-gap($direction, $gap, $width: 100%) {
+  $prefix: string.slice($gap, 1, 2);
+  @if $prefix == "--" {
+    // is custom prop
+    $gap: var($gap);
+  }
+
+  $coef: 1; // unset variable error, must set.
+  @if $direction == "left" or $direction == "up" {
+    $coef: -1;
+  } @else if $direction != "right" and $direction != "down" {
+    @error "invalid parameter: cannot move element '#{$direction}'.";
+  }
+
+  @return calc((#{$width} + #{$gap}) * #{$coef});
+}

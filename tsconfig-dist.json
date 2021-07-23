@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "removeComments": true,
+    "allowJs": false,
+    "types": ["@types/firefox-webext-browser", "node", "jest"],
+    "typeRoots": ["node_modules/@types"],
+    "outDir": "./dist",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": false,
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@lib/*": ["app/lib/*"],
+      "@test/*": ["test/*"],
+      "@test-helpers/*": ["test/helpers/*"],
+      "@fakes/*": ["test/fakes/*"],
+      "@stubs/*": ["test/stubs/*"],
+      "@perf/*": ["test/perf/*"]
+    },
+    "moduleResolution": "node",
+    "target": "es2020",
+    "lib": ["es2020", "dom"],
+    "esModuleInterop": true
+  },
+  "include": ["src/app/scripts/**/*.ts"]
+}

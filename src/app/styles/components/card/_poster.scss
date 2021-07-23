@@ -1,0 +1,35 @@
+@use '../../tools/pseudo';
+
+@mixin base($block-name: "poster") {
+  .c-#{$block-name} {
+    position: relative;
+    height: 100%;
+
+    &__bd {
+      top: 0px;
+      left: 0px;
+    }
+
+    &__img {
+      object-fit: cover;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+}
+
+@mixin pop($block-name: "poster") {
+  .c-#{$block-name}--skin {
+    transition: transform 0.15s ease-in-out;
+  }
+  @include pseudo.focusable() {
+    transform: scale(1.02);
+  } 
+}
+
+@mixin shadow($block-name: "poster", $shadow: 0px 0px 5px 1px black) {
+  .c-#{$block-name}--skin {
+    box-shadow: #{$shadow};
+  }
+}

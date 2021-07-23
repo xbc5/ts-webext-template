@@ -1,0 +1,19 @@
+/// Create a backdrop that's absolutely positioned.
+/// @content You can overwrite any property, but there is no background image or colour set by
+/// default.
+/// @parameter {number} $z-index [-1] - set the z-index.
+/// @output Properties that define an absolutely positioned element, with a 100% width and height,
+/// and a z-index either set by you, or -1.
+/// @example
+/// @include pseudo-bg($z-index: -2) {
+///   background-color: blue;
+/// }
+@mixin backdrop($z-index: -1) {
+  z-index: #{$z-index};
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  @content;
+}

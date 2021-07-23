@@ -1,0 +1,70 @@
+@use '../../tools/theme';
+@use '../../tools/text';
+
+$name: exibition !default;
+
+@mixin base($name: $name, $content-padding: 1em) {
+  .c-#{$name}__menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    @include text.disable-selection();
+  }
+
+  .c-#{$name}__content {
+    padding: #{$content-padding};
+  }
+}
+
+@mixin dual-pane($name: $name, $menu-spacing: 0.5em, $left: 1fr, $right: 5fr, $menu-top: 1em) {
+  .c-#{$name} {
+    min-height: 200vh; // for sticky menu
+    display: grid;
+    grid-template-columns: #{$left} #{$right};
+  }
+
+  .c-#{$name}__menu-wrapper {
+    overflow: visible; // enable sticky position for menu
+    height: 100%;
+  }
+
+  .c-#{$name}__menu {
+    position: sticky;
+    top: #{$menu-top};
+    padding: $menu-spacing;
+  }
+  
+  .c-#{$name}__header {
+      margin-bottom: $menu-spacing;
+      &--skin {
+          text-align: right;
+      }
+  }
+}
+
+@mixin clr($menu-clr: 4) {
+  .c-#{$name}__menu--skin {
+      color: theme.clr($menu-clr);
+  }
+  
+  .c-#{$name}__content--skin {
+      @include theme.set-clr(2);
+  }
+}
+
+@mixin font($menu-weight: 900, $menu-size: 1.3rem) {
+  .c-#{$name}__menu--skin {
+      font-weight: $menu-weight;
+      font-size: $menu-size;
+  }
+}
+
+
+@mixin constructor($type) {
+    @include base();
+    @if $type == dual-pane {
+        @include dual-pane();
+    }
+    @include clr();
+    @include font();
+}

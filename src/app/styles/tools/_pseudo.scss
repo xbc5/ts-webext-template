@@ -1,0 +1,24 @@
+$focusable-class: "o-focusable";
+/// A selector target for elements that users can focus.
+///
+/// This is essentially a placeholder with no styles. Typically
+/// you'd apply this to the container block, and then use it
+/// within a child component, when selecting child elements for styling with
+/// :focus or :focus-within.
+///
+/// This class is necessary because you can only apply the tabindex propery
+/// where it makes sense (typically the container block). Composition can get
+/// in the way by separating the block container from its child, making it
+/// less reliable for children to select the container block.
+///
+/// In short, it's a conventient and standardised way to target the container block.
+///
+/// @param {string} $pseudo-class - psuedo/psuedo-within (exclude the colon).
+/// @content any styles you wish to become active when the focusable element is focused.
+/// @output the class .o-focusable:focus[-within], with whatever styles you include via
+/// content.
+@mixin focusable($pseudo-class: focus-within) {
+    .#{$focusable-class}:#{$pseudo-class} {
+        @content
+    }
+}

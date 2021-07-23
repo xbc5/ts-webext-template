@@ -1,0 +1,49 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../settings/theme';
+
+/// Return the color prop for the given ID,
+@function clr($id, $contrast: false, $wrap: true, $alpha: 1) {
+  $prop: --clr-#{$id};
+  
+  @if $contrast {
+    $prop: --clr-#{$id}-contrast;
+  }
+
+  @if $wrap {
+    @return hsla(var(#{$prop}), #{$alpha});
+  }
+  @return $prop;
+}
+
+@mixin set-clr($id, $bg-alpha: 1, $fg-alpha: 1) {
+  background-color: clr($id, $alpha: $bg-alpha);
+  color: clr($id, $contrast: true, $alpha: $fg-alpha);
+}
+
+/// Create global variables AND use-case specific colour classes (e.g. CTA, brand etc.
+/// it creates a variable for each colour, along with its contrasting colour
+/// (typically black or white).
+@mixin analogous-complementary($key, $brand: 3, $bg: 1) {
+  $t: map.get(theme.$analogous-complementary, $key);
+  
+  :root {
+    @each $id, $v in $t  {
+      --clr-#{$id}: #{$v};
+    }
+  }
+
+  /*
+    TODO: move these to components, or some other generic module. these don't belong in tools.
+  */
+  .clr-bg {
+    @include set-clr($bg)
+  }
+  .clr-brand {
+    @include set-clr($brand)
+  }
+}
+
+:root {
+  --border-radius: #{theme.$border-radius};
+}

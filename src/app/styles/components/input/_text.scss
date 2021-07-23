@@ -1,0 +1,25 @@
+@use '../../tools/theme';
+
+@mixin base(
+  $name: textinput,
+  $border: 1px solid black,
+  $border-radius: var(--border-radius)
+) {
+  .c-#{$name} {
+    &--skin {
+      border: $border;
+      border-radius: $border-radius;
+    }
+  }
+}
+
+@mixin size($name: textinput, $width: null, $height: null) {
+  .c-#{$name} {
+    @if $width != null {
+      width: $width;
+    }
+    @if $height != null {
+      height: $height;
+    }
+  }
+}

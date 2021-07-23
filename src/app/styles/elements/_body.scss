@@ -1,0 +1,9 @@
+@mixin set-height($height: 100%) {
+    html, body {
+        height: #{$height};
+    }
+}
+
+@mixin max-height {
+    @include set-height($height: 100%);
+}

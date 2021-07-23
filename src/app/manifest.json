@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "%WEBEXT-MANIFEST-NAME%",
+    "description": "%WEBEXT-MANIFEST-DESCRIPTION%",
+    "version": "0.0.1",
+    "icons": {
+        "64": "icons/icon.png"
+    },
+    "background": {
+        "scripts": [
+            "scripts/bg/general.js"
+        ]
+    },
+    "browser_action": {
+        "default_icon": {
+            "64": "assets/icons/icon.png"
+        },
+        "default_popup": "browser-action/index.html"
+    },
+    "commands": {
+        "open-home": {
+            "suggested_key": {
+                "default": "Alt+N"
+            },
+            "description": "Open the extension home page."
+        }
+    }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "%NPM-PROJECT-NAME%",
+  "version": "0.0.1",
+  "description": "%NPM-PROJECT-DESCRIPTION%",
+  "main": "index.js",
+  "author": "null",
+  "license": "MIT",
+  "watch": {
+    "build:quick": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "*"
+    }
+  },
+  "scripts": {
+    "build": "NODE_ENV=development scripts/build.sh",
+    "build:check": "tsc --noEmit",
+    "build:quick": "NODE_ENV=development scripts/build.sh --quick",
+    "build:sass": "scripts/build-sass.sh",
+    "build:production": "NODE_ENV=production scripts/build.sh",
+    "clean": "scripts/clean.sh",
+    "watch": "scripts/watch.sh",
+    "start": "scripts/start.sh",
+    "test": "jest src/test",
+    "test:unit": "jest src/test/unit",
+    "test:integration": "jest src/test/integration",
+    "perf:all": "scripts/benchmark.sh '*'",
+    "perf:fuse": "scripts/benchmark.sh fuse",
+    "perf:rank": "scripts/benchmark.sh rank"
+  },
+  "devDependencies": {
+    "@types/benchmark": "^2.1.0",
+    "@types/chalk": "^2.2.0",
+    "@types/faker": "^5.5.6",
+    "@types/firefox-webext-browser": "^82.0.0",
+    "@types/jest": "^26.0.23",
+    "@types/microtime": "^2.1.0",
+    "@types/node": "^15.6.0",
+    "benchmark": "^2.1.4",
+    "chalk": "^4.1.1",
+    "cpy-cli": "^3.1.1",
+    "esbuild": "^0.12.5",
+    "fake-indexeddb": "^3.1.2",
+    "faker": "^5.5.3",
+    "jest": "^27.0.4",
+    "microtime": "^3.0.0",
+    "npm-watch": "^0.9.0",
+    "sanitize.css": "^12.0.1",
+    "sass": "^1.34.0",
+    "ts-jest": "^27.0.2",
+    "ts-node": "^10.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.2.4",
+    "web-ext": "^6.1.0"
+  }
+}

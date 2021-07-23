@@ -1,0 +1,19 @@
+@mixin vlayout($name: "vlayout", $template-rows: 1fr 10fr 1fr) {
+  .o-#{$name} {
+    display: grid;
+    grid-template-rows: $template-rows;
+  }
+}
+
+@mixin even-grid(
+  $name: evengrid,
+  $min-width: 300px,
+  $min-height: 300px,
+  $max-height: 400px
+) {
+  .o-#{$name} {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+    grid-template-rows: minmax($min-height, $max-height);
+  }
+}

@@ -1,0 +1,12 @@
+@mixin center-child($name: centerchild, $width: null, $height: null) {
+    .t-#{$name} {
+        display: grid;
+        place-content: center;
+        @if $width != null {
+            grid-template-columns: $width;
+        }
+        @if $height != null {
+            grid-template-rows: $height;
+        }
+    }
+}

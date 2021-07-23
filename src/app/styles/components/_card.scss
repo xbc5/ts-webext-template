@@ -1,0 +1,117 @@
+@use '../tools/theme';
+@use '../tools/areas';
+@use '../tools/translate';
+@use '../tools/pseudo';
+
+@mixin base($head-clr: false, $subhead-clr: false, $padding: 1em) {
+  .c-card {
+    --local-padding: #{$padding};
+    padding: var(--local-padding);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+      flex: 1 1 auto;
+    }
+
+    @if $subhead-clr != false {
+      &__subhead--skin {
+        color: theme.clr($subhead-clr);
+      }
+    }
+    @if head-clr != false {
+      &__head--skin {
+        color: theme.clr($head-clr);
+      }
+    }
+  }
+}
+
+/// Create an outline when the focusable element is focused.
+/// 
+/// @param {string|int} $clr [hl] - provide a theme colour ID.
+/// @param {<length>} $size [2px] - the width of the outline.
+/// @output a compound selector, applied to the .c-card--skin class
+/// when the focusable element is focused. It's a single style -- an
+/// outline.  
+@mixin focus-outline($size: 2px, $clr: hl) {
+  @include pseudo.focusable() {
+    .c-card--skin {
+      outline: #{$size} solid #{theme.clr($clr)};
+    }
+  }
+}
+
+@mixin swish(
+  $bg-clr: 2,
+  $header-bg-clr: 2,
+  $foot-bg-clr: 1,
+  $bg-alpha: 0.9,
+  $duration: 0.15s,
+  $delay: 0.15s
+) {
+  .c-card {
+    &--skin {
+      overflow: hidden;
+      color: theme.clr(
+        $bg-clr,
+        $contrast: true,
+        $alpha: 1
+      ); // contrast against bg color
+
+      /* ###### Backdrop #####
+        required for contrasting the initial (main) title, and to contrast the text content. */
+      // -- make the backdrop
+      &::after {
+        content: ""; // make pseudo-element visible;
+        transition: background-color #{$duration} #{$delay} ease-in-out;
+        @include areas.backdrop() {
+          $head-clr: theme.clr($header-bg-clr);
+          $foot-clr: theme.clr($foot-bg-clr, $alpha: 0.1);
+          background-image: linear-gradient(
+            to bottom,
+            #{$head-clr} 15% /* bg color */,
+            #{$foot-clr} /* transparent */
+          );
+        }
+      }
+
+      // -- fade it in
+      &:focus-within::after {
+        background-color: theme.clr($bg-clr, $alpha: $bg-alpha);
+      }
+    }
+
+    // ###### Content #####
+    // -- set transform parameters
+    &__subhead--skin,
+    &__content--skin {
+      transition: transform #{$duration} #{$delay} ease-in-out;
+    }
+
+    // -- init content
+    // move it off to the side (out of bounds)
+    &__content--skin {
+      transform: translateX(translate.with-gap(left, --local-padding));
+    }
+    &__subhead--skin {
+      transform: translateX(translate.with-gap(right, --local-padding));
+    }
+  }
+
+  @include pseudo.focusable {
+    // this produces .o-focusable, which is applied to the container block.
+
+    // -- translate back to origin
+    // ! This MUST have higher specificity than __head--skin, __subhead--skin, and __content--skin individually
+    //   so that transform is overridden.
+    .c-card {
+      &__head--skin,
+      &__subhead--skin,
+      &__content--skin {
+        transform: translateX(0);
+      }
+    }
+  }
+}

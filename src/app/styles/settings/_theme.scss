@@ -1,0 +1,28 @@
+$black: 0, 0%, 0%;
+$white: 0, 0%, 100%;
+
+$blue: 207, 100%, 29%;
+$orange: 22.5, 88.5%, 56%;
+$orange-yellow: 49, 91.5%, 59%;
+$orange-red: 11, 99%, 61.4%;
+
+$sky-theme: (
+  "1": $black,
+  "2": $blue,
+  "3": $orange,
+  "4": $orange-yellow,
+  "hl": $white,
+  "1-contrast": $white,  // for black
+  "2-contrast": $white,  // for blue
+  "3-contrast": $black,  // for orange
+  "4-contrast": $black,  // for orange-yellow
+  "hl-contrast": $black  // for white
+);
+
+$analogous-complementary: ("sky": $sky-theme);
+
+$fnt-default: Heebo;
+$fnt-head: Fira Sans;
+$fnt-content: Roboto;
+
+$border-radius: 5px

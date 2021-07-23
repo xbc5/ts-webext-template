@@ -1,0 +1,32 @@
+@use '../settings/theme';
+
+@mixin headers() {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: theme.$fnt-head;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@mixin default() {
+  * {
+    font-family: theme.$fnt-default;
+  }
+}
+
+@mixin content() {
+  p {
+    font-family: theme.$fnt-content;
+  }
+}

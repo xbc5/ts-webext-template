@@ -1,0 +1,26 @@
+@use 'generic/sanitize';
+@use 'tools/theme';
+@use 'tools/position';
+@use 'elements/typography';
+@use 'elements/body';
+@use 'objects/layouts';
+@use 'components/card/poster';
+@use 'components/input/text';
+@use 'components/card';
+@use 'components/btn';
+@use 'trumps/debug';
+
+@include theme.analogous-complementary("sky");
+@include position.center-child($width: 80%, $height: 60%);
+
+@include typography.default();
+@include typography.headers();
+@include typography.content();
+@include body.max-height();
+
+@include layouts.vlayout();
+@include layouts.even-grid();
+
+@include text.base();
+
+@include debug.implicit-outlines();
